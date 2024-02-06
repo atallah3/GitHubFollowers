@@ -50,6 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         UITabBar.appearance().tintColor = .systemGreen
         tabBar.viewControllers = [createSearchNC(),createFavoriteNC()]
+        
         return tabBar
     }
     

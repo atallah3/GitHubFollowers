@@ -25,7 +25,7 @@ class GFTextField: UITextField {
         //this line to provide an custom constrains if it set to false
         translatesAutoresizingMaskIntoConstraints = false
         
-        layer.cornerRadius = 16
+        layer.cornerRadius = 10
         layer.borderColor = UIColor.systemGray.cgColor
         layer.borderWidth = 2
         
