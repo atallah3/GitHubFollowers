@@ -26,7 +26,6 @@ class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configurelogoImageView()
         configureUserNameTextField()
         configuregoToFollowersAction()
@@ -60,7 +59,7 @@ class SearchVC: UIViewController {
         }
         
         let followerVC = FollowersListVC()
-        followerVC.userName = userNameTextField.text
+        followerVC.username = userNameTextField.text
         followerVC.title = userNameTextField.text
         navigationController?.pushViewController(followerVC, animated: true)
     }

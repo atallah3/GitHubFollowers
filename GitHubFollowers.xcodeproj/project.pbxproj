@@ -26,6 +26,7 @@
 		F73B99F62B6FD2F8003A5820 /* FavoriteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B99F52B6FD2F8003A5820 /* FavoriteListVC.swift */; };
 		F73B99F82B6FF9AF003A5820 /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B99F72B6FF9AF003A5820 /* GFButton.swift */; };
 		F73B99FA2B6FFC70003A5820 /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B99F92B6FFC70003A5820 /* GFTextField.swift */; };
+		F754F01D2B7A64E20046F788 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F754F01C2B7A64E20046F788 /* UIHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		F73B99F52B6FD2F8003A5820 /* FavoriteListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListVC.swift; sourceTree = "<group>"; };
 		F73B99F72B6FF9AF003A5820 /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 		F73B99F92B6FFC70003A5820 /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
+		F754F01C2B7A64E20046F788 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				F7243A4A2B77DF310035CA8C /* ErrorMessaga.swift */,
+				F754F01C2B7A64E20046F788 /* UIHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				F7275AE02B73C985000923F2 /* FollowersListVC.swift in Sources */,
 				F73B99F62B6FD2F8003A5820 /* FavoriteListVC.swift in Sources */,
 				F73B99F82B6FF9AF003A5820 /* GFButton.swift in Sources */,
+				F754F01D2B7A64E20046F788 /* UIHelper.swift in Sources */,
 				F7243A502B780B1B0035CA8C /* GFAvatarImageView.swift in Sources */,
 				F7275AE62B73EC63000923F2 /* GFAlertVC.swift in Sources */,
 				F7275AE42B73E9BA000923F2 /* GFBodyLabel.swift in Sources */,
@@ -395,6 +399,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2F6FZV8L79;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GitHubFollowers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -425,6 +430,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2F6FZV8L79;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GitHubFollowers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

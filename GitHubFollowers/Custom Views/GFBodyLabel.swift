@@ -34,6 +34,4 @@ class GFBodyLabel: UILabel {
         minimumScaleFactor = 0.7
         lineBreakMode = .byWordWrapping
     }
-    
-
 }

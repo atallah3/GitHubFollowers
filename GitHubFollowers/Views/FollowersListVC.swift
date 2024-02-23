@@ -9,11 +9,12 @@ import UIKit
 
 class FollowersListVC: UIViewController {
     //MARK: - Properties
-    enum Section{
-        case main
-    }
-    var userName : String!
+    enum Section{ case main }
+    
+    var username : String!
     var followers : [Follower] = []
+    var page = 1
+    var hasMoreFollowers = true
     var colllectionView : UICollectionView!
     var dataSourse : UICollectionViewDiffableDataSource<Section, Follower>!
     
@@ -23,7 +24,7 @@ class FollowersListVC: UIViewController {
         super.viewDidLoad()
         configureViewDidLoad()
         configureCollectionView()
-        getFollowers()
+        getFollowers(username: username, page: page)
         configureDataSource()
     }
     
@@ -42,13 +43,17 @@ class FollowersListVC: UIViewController {
     }
     
     
-    func getFollowers() {
-        NetworkManager.shared.getFollowers(For: userName, page: 1) { result in
-            
+    func getFollowers(username : String,page : Int) {
+        showLoadingView()
+        NetworkManager.shared.getFollowers(For: username, page: page) { [weak self]  result in
+            guard let self = self else {return}
+            self.dismissLoadingView()
             switch result {
             case .success(let followers):
-                print("Succes!!!!!!!!!!!!!!!!!!!!")
-                self.followers = followers
+                if followers.count < 100{
+                    hasMoreFollowers = false
+                }
+                self.followers.append(contentsOf: followers)
                 self.updateData()
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
@@ -58,25 +63,11 @@ class FollowersListVC: UIViewController {
     
     
     func configureCollectionView() {
-        colllectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
+        colllectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
+        colllectionView.delegate = self
         view.addSubview(colllectionView)
-        colllectionView.backgroundColor = .brown
+        colllectionView.backgroundColor = .systemBackground
         colllectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseId)
-    }
-    
-    
-    func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
-        let width = view.bounds.width
-        let padding : CGFloat = 12
-        let itemMinimumSpace : CGFloat = 10
-        let availableWidth = width - (itemMinimumSpace*2) - (padding*2)
-        let itemWidth = availableWidth / 3
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-            
-        return flowLayout
     }
     
     
@@ -96,6 +87,22 @@ class FollowersListVC: UIViewController {
         snapshot.appendItems (followers)
         DispatchQueue.main.async{
             self.dataSourse.apply(snapshot,animatingDifferences: true)
+        }
+    }
+}
+
+
+extension FollowersListVC : UICollectionViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height{
+            guard hasMoreFollowers else {return}
+            page += 1
+            getFollowers(username: username, page: page)
         }
     }
 }

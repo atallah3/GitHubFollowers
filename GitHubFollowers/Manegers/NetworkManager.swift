@@ -5,15 +5,15 @@
 //  Created by Abd Elrahman Atallah on 08/02/2024.
 //
 
-import Foundation
+import UIKit
 
 
 struct NetworkManager{
 //    singleton
     static let shared = NetworkManager()
 //    private init (){}
-    
-    let baseUrl = "https://api.github.com/users/"
+    private let baseUrl = "https://api.github.com/users/"
+    let cache = NSCache<NSString,UIImage>()
     
     func getFollowers(For username : String,page : Int,completed : @escaping (Result<[Follower],GFError>)-> Void){
         let endPoint = baseUrl + "\(username)/followers?per_page=100&page=\(page)"
