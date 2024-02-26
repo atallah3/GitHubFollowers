@@ -8,21 +8,24 @@
 import UIKit
 
 class FollowersListVC: UIViewController {
-    //MARK: - Properties
+//MARK: - Properties
     enum Section{ case main }
     
     var username : String!
     var followers : [Follower] = []
+    var filterdFollwers : [Follower] = []
     var page = 1
     var hasMoreFollowers = true
+    var isSearching = false
     var colllectionView : UICollectionView!
     var dataSourse : UICollectionViewDiffableDataSource<Section, Follower>!
     
-    //MARK: - View lifeCycle
+//MARK: - View lifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewDidLoad()
+        configureSearchController()
         configureCollectionView()
         getFollowers(username: username, page: page)
         configureDataSource()
@@ -35,7 +38,7 @@ class FollowersListVC: UIViewController {
     }
     
     
-    //MARK: - Functions
+//MARK: - Functions
     
     func configureViewDidLoad() {
         view.backgroundColor = .systemBackground
@@ -54,11 +57,27 @@ class FollowersListVC: UIViewController {
                     hasMoreFollowers = false
                 }
                 self.followers.append(contentsOf: followers)
-                self.updateData()
+                
+                if self.followers.isEmpty{
+                    let message = "This user doesn't have any followers. go follow them 😁"
+                    DispatchQueue.main.async {
+                        self.showEmptyStateView(with: message, in: self.view)
+                    }
+                }
+                self.updateData(on: self.followers)
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
             }
         }
+    }
+    
+    
+    func configureSearchController(){
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate   = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
     }
     
     
@@ -81,7 +100,7 @@ class FollowersListVC: UIViewController {
     }
     
     
-    func updateData() {
+    func updateData(on followers : [Follower]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         snapshot.appendSections ([.main])
         snapshot.appendItems (followers)
@@ -91,6 +110,7 @@ class FollowersListVC: UIViewController {
     }
 }
 
+//MARK: - Extensions
 
 extension FollowersListVC : UICollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -104,5 +124,31 @@ extension FollowersListVC : UICollectionViewDelegate {
             page += 1
             getFollowers(username: username, page: page)
         }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let activeArray = isSearching ? filterdFollwers : followers
+        let follower = activeArray[indexPath.item]
+        
+        let userInfoVC = UserInfoVC()
+        userInfoVC.username = follower.login
+        let navController = UINavigationController(rootViewController: userInfoVC)
+        present(navController, animated: true)
+    }
+}
+
+
+extension FollowersListVC : UISearchResultsUpdating,UISearchBarDelegate{
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text , !filter.isEmpty else {return}
+        isSearching = true
+        filterdFollwers = followers.filter {$0.login.lowercased().contains(filter.lowercased())}
+        updateData(on: filterdFollwers)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
+        updateData(on: followers)
     }
 }

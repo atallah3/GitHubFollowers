@@ -26,6 +26,8 @@
 		F73B99F62B6FD2F8003A5820 /* FavoriteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B99F52B6FD2F8003A5820 /* FavoriteListVC.swift */; };
 		F73B99F82B6FF9AF003A5820 /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B99F72B6FF9AF003A5820 /* GFButton.swift */; };
 		F73B99FA2B6FFC70003A5820 /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B99F92B6FFC70003A5820 /* GFTextField.swift */; };
+		F74E7DFE2B8A612B005A2B9B /* GFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74E7DFD2B8A612B005A2B9B /* GFEmptyStateView.swift */; };
+		F750F77F2B8D0A6000036CB9 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F750F77E2B8D0A6000036CB9 /* UserInfoVC.swift */; };
 		F754F01D2B7A64E20046F788 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F754F01C2B7A64E20046F788 /* UIHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		F73B99F52B6FD2F8003A5820 /* FavoriteListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListVC.swift; sourceTree = "<group>"; };
 		F73B99F72B6FF9AF003A5820 /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 		F73B99F92B6FFC70003A5820 /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
+		F74E7DFD2B8A612B005A2B9B /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = "<group>"; };
+		F750F77E2B8D0A6000036CB9 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		F754F01C2B7A64E20046F788 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +92,7 @@
 				F739400B2B756FCC00F4A18F /* Manegers */,
 				F73940062B751ADF00F4A18F /* Model */,
 				F7275AEB2B740965000923F2 /* Custom Views */,
-				F7275AEA2B74092A000923F2 /* Views */,
+				F7275AEA2B74092A000923F2 /* Screens */,
 				F7275AEC2B740987000923F2 /* Support */,
 				F7275AE92B7408F8000923F2 /* Extensions */,
 				F7097EDC2B6E9F8B00B99A7B /* Info.plist */,
@@ -121,26 +125,27 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		F7275AEA2B74092A000923F2 /* Views */ = {
+		F7275AEA2B74092A000923F2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				F73B99F32B6FD2D3003A5820 /* SearchVC.swift */,
 				F7275ADF2B73C985000923F2 /* FollowersListVC.swift */,
 				F73B99F52B6FD2F8003A5820 /* FavoriteListVC.swift */,
+				F750F77E2B8D0A6000036CB9 /* UserInfoVC.swift */,
 			);
-			path = Views;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		F7275AEB2B740965000923F2 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				F74E7DFC2B8A60EF005A2B9B /* View */,
+				F74E7DFB2B8A60DE005A2B9B /* ImageViews */,
+				F74E7DFA2B8A60CC005A2B9B /* Labels */,
+				F74E7DF92B8A60B9005A2B9B /* TextFields */,
+				F74E7DF82B8A60A3005A2B9B /* Buttons */,
+				F74E7DF62B8A6071005A2B9B /* View Cotrollers */,
 				F7243A4C2B7808A90035CA8C /* Cells */,
-				F73B99F72B6FF9AF003A5820 /* GFButton.swift */,
-				F7275AE52B73EC63000923F2 /* GFAlertVC.swift */,
-				F73B99F92B6FFC70003A5820 /* GFTextField.swift */,
-				F7275AE12B73E9A2000923F2 /* GfTitleLabel.swift */,
-				F7275AE32B73E9BA000923F2 /* GFBodyLabel.swift */,
-				F7243A4F2B780B1B0035CA8C /* GFAvatarImageView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -171,6 +176,55 @@
 				F739400C2B75712C00F4A18F /* NetworkManager.swift */,
 			);
 			path = Manegers;
+			sourceTree = "<group>";
+		};
+		F74E7DF62B8A6071005A2B9B /* View Cotrollers */ = {
+			isa = PBXGroup;
+			children = (
+				F7275AE52B73EC63000923F2 /* GFAlertVC.swift */,
+			);
+			path = "View Cotrollers";
+			sourceTree = "<group>";
+		};
+		F74E7DF82B8A60A3005A2B9B /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				F73B99F72B6FF9AF003A5820 /* GFButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		F74E7DF92B8A60B9005A2B9B /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				F73B99F92B6FFC70003A5820 /* GFTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		F74E7DFA2B8A60CC005A2B9B /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				F7275AE12B73E9A2000923F2 /* GfTitleLabel.swift */,
+				F7275AE32B73E9BA000923F2 /* GFBodyLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		F74E7DFB2B8A60DE005A2B9B /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				F7243A4F2B780B1B0035CA8C /* GFAvatarImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
+		F74E7DFC2B8A60EF005A2B9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F74E7DFD2B8A612B005A2B9B /* GFEmptyStateView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,10 +311,12 @@
 				F7275AE22B73E9A2000923F2 /* GfTitleLabel.swift in Sources */,
 				F73940082B751AF000F4A18F /* Follower.swift in Sources */,
 				F7275AE82B740326000923F2 /* UIViewController+EXT.swift in Sources */,
+				F74E7DFE2B8A612B005A2B9B /* GFEmptyStateView.swift in Sources */,
 				F739400D2B75712C00F4A18F /* NetworkManager.swift in Sources */,
 				F73B99F42B6FD2D3003A5820 /* SearchVC.swift in Sources */,
 				F7097ECF2B6E9F8A00B99A7B /* AppDelegate.swift in Sources */,
 				F7097ED12B6E9F8A00B99A7B /* SceneDelegate.swift in Sources */,
+				F750F77F2B8D0A6000036CB9 /* UserInfoVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +453,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2F6FZV8L79;
@@ -414,6 +471,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = atallah.GitHubFollowers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -428,6 +486,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2F6FZV8L79;
@@ -445,6 +504,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = atallah.GitHubFollowers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
