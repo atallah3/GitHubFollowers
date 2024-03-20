@@ -11,15 +11,11 @@ class SearchVC: UIViewController {
     
     //MARK: - properties
     var logoImageView = UIImageView()
-    
     var userNameTextField = GFTextField()
-    
     var goToFollowersButtonAction = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
-    
     var isNameEntered : Bool{
         return userNameTextField.text!.isEmpty
     }
-    //MARK: - IBOutlet
     
     
     //MARK: - View LifeCycle
@@ -36,6 +32,7 @@ class SearchVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         configureUI()
+        userNameTextField.text = ""
     }
     
     //MARK: - Functions
@@ -47,7 +44,7 @@ class SearchVC: UIViewController {
     
     
     func createDismissKeyboardTap(){
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
     }
     
@@ -58,16 +55,16 @@ class SearchVC: UIViewController {
             return
         }
         
-        let followerVC = FollowersListVC()
-        followerVC.username = userNameTextField.text
-        followerVC.title = userNameTextField.text
+        userNameTextField.resignFirstResponder()
+        
+        let followerVC = FollowersListVC(username: userNameTextField.text!)
         navigationController?.pushViewController(followerVC, animated: true)
     }
     
     func configurelogoImageView(){
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(named: "gh-logo")!
+        logoImageView.image = Images.ghLogo
         
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),

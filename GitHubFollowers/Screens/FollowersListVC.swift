@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol FollowerListVCDelegate : AnyObject {
+    func didRequestFollowers(with username : String)
+}
 class FollowersListVC: UIViewController {
+    
 //MARK: - Properties
     enum Section{ case main }
+    var delegate : UserInfoVCDelegate!
     
     var username : String!
     var followers : [Follower] = []
@@ -17,8 +22,21 @@ class FollowersListVC: UIViewController {
     var page = 1
     var hasMoreFollowers = true
     var isSearching = false
-    var colllectionView : UICollectionView!
+    var collectionView : UICollectionView!
     var dataSourse : UICollectionViewDiffableDataSource<Section, Follower>!
+    
+    
+//MARK: - init
+    init(username : String) {
+        super.init(nibName: nil, bundle: nil)
+        self.username = username
+        title = username
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
 //MARK: - View lifeCycle
     
@@ -43,6 +61,38 @@ class FollowersListVC: UIViewController {
     func configureViewDidLoad() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    
+    @objc func addButtonTapped(){
+        showLoadingView()
+        
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            
+            switch result {
+            case .success(let user):
+                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+                
+                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { error in
+                    guard let error = error else {
+                        self.presentGFAlertOnMainThread(title: "Succesful!", message: "You have succesfully favorited this user", buttonTitle: "OK")
+                        return
+                    }
+                    
+                    self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "OK")
+                    
+                }
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "OK")
+            }
+            
+            
+        }
     }
     
     
@@ -82,16 +132,16 @@ class FollowersListVC: UIViewController {
     
     
     func configureCollectionView() {
-        colllectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
-        colllectionView.delegate = self
-        view.addSubview(colllectionView)
-        colllectionView.backgroundColor = .systemBackground
-        colllectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseId)
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
+        collectionView.delegate = self
+        view.addSubview(collectionView)
+        collectionView.backgroundColor = .systemBackground
+        collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseId)
     }
     
     
     func configureDataSource() {
-        dataSourse = UICollectionViewDiffableDataSource<Section,Follower>(collectionView: colllectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell in
+        dataSourse = UICollectionViewDiffableDataSource<Section,Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseId, for: indexPath) as! FollowerCell
             cell.set(follower: follower)
             return cell
@@ -133,6 +183,7 @@ extension FollowersListVC : UICollectionViewDelegate {
         
         let userInfoVC = UserInfoVC()
         userInfoVC.username = follower.login
+        userInfoVC.delegate = self
         let navController = UINavigationController(rootViewController: userInfoVC)
         present(navController, animated: true)
     }
@@ -150,5 +201,18 @@ extension FollowersListVC : UISearchResultsUpdating,UISearchBarDelegate{
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
         updateData(on: followers)
+    }
+}
+
+
+extension FollowersListVC : FollowerListVCDelegate{
+    func didRequestFollowers(with username: String) {
+        self.username = username
+        page = 1
+        title = username
+        followers.removeAll()
+        filterdFollwers.removeAll()
+        collectionView.setContentOffset(.zero, animated: true)
+        getFollowers(username: username, page: page)
     }
 }
