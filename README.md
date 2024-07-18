@@ -15,7 +15,7 @@ viewing detailed follower information, and saving favorite searches.
 
 ## Screenshots
 <p align="center">
-  <img src="GitHubFollowers/Screenshots/1.PNG" width="200" style="margin: 40px;" />
+  <img src="GitHubFollowers/Screenshots/1.PNG" width="200" style="margin-right: 40px;" />
  <img src="GitHubFollowers/Screenshots/2.PNG" width="200" style="margin: 40px;" />
 </p>
 <p align="center">
