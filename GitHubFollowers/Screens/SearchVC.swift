@@ -22,6 +22,7 @@ class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubviews(logoImageView,userNameTextField,goToFollowersButtonAction)
         configurelogoImageView()
         configureUserNameTextField()
         configuregoToFollowersAction()
@@ -62,7 +63,6 @@ class SearchVC: UIViewController {
     }
     
     func configurelogoImageView(){
-        view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = Images.ghLogo
         
@@ -76,7 +76,6 @@ class SearchVC: UIViewController {
     
     
     func configureUserNameTextField(){
-        view.addSubview(userNameTextField)
         userNameTextField.delegate = self
         userNameTextField.returnKeyType = .search
          
@@ -90,7 +89,6 @@ class SearchVC: UIViewController {
     
     
     func configuregoToFollowersAction(){
-        view.addSubview(goToFollowersButtonAction)
         goToFollowersButtonAction.addTarget(self, action: #selector(pushFollowerVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([

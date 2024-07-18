@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct UIHelper {
+// it was a struct and replace it eith enum because we don`t need any one to do that let helper = UIHelper()
+enum UIHelper {
     
   static func createThreeColumnFlowLayout(in view : UIView) -> UICollectionViewFlowLayout {
         let width = view.bounds.width

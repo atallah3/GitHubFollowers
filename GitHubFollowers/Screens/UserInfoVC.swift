@@ -12,7 +12,7 @@ protocol UserInfoVCDelegate : AnyObject {
     func didTabGetFollowersButton(for user : User)
 }
 
-class UserInfoVC: UIViewController {
+class UserInfoVC: GFDataLoadingVC {
     
 //MARK: - properties
     
@@ -103,7 +103,7 @@ class UserInfoVC: UIViewController {
             itemViewTwo.heightAnchor.constraint(equalToConstant: 140),
             
             dataLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
-            dataLabel.heightAnchor.constraint(equalToConstant: 18)
+            dataLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     

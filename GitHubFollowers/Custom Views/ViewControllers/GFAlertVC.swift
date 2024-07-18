@@ -10,7 +10,7 @@ import UIKit
 class GFAlertVC: UIViewController {
     //MARK: - properties
     
-    let containerView = UIView()
+    let containerView = GFAlertContainerView(frame: .zero)
     let titleLabel = GfTitleLabel(textAlignment: .center, fontSize: 20)
     let bodyLabel = GFBodyLabel(textAlignment: .center)
     let actionButton = GFButton(backgroundColor: .systemPink, title: "OK")
@@ -38,8 +38,9 @@ class GFAlertVC: UIViewController {
     //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         configureContainerView()
+        containerView.addSubviews(titleLabel,actionButton,bodyLabel)
         configureTitleLabel()
         configureActionButton()
         configureBodyLabel()
@@ -51,11 +52,6 @@ class GFAlertVC: UIViewController {
     
     func configureContainerView(){
         view.addSubview(containerView)
-        containerView.backgroundColor = .systemBackground
-        containerView.layer.cornerRadius = 16
-        containerView.layer.borderColor = UIColor.white.cgColor
-        containerView.layer.borderWidth = 2
-        containerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -67,7 +63,6 @@ class GFAlertVC: UIViewController {
     
     
     func configureTitleLabel(){
-        containerView.addSubview(titleLabel)
         titleLabel.text = alertTitle ?? "Some Thing Went Wrong"
         
         NSLayoutConstraint.activate([
@@ -79,7 +74,6 @@ class GFAlertVC: UIViewController {
     }
     
     func configureActionButton(){
-        containerView.addSubview(actionButton)
         actionButton.setTitle(buttonTitle, for: .normal)
         actionButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         
@@ -98,7 +92,6 @@ class GFAlertVC: UIViewController {
     
     
     func configureBodyLabel(){
-        containerView.addSubview(bodyLabel)
         bodyLabel.text = message ?? "ERROR"
         bodyLabel.numberOfLines = 4
         
